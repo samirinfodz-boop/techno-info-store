@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techno Infodz â€“ Boutique Lecteurs Code Barre & POS | Algأ©rie</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --c:#00D4E0;--c2:#007f88;--acc:#FF6B2B;--acc2:#e05520;
+  --bg:#060D1A;--bg2:#0B1628;--bg3:#0F1E35;
+  --border:rgba(0,212,224,0.13);
+  --text:#E8F4F8;--muted:rgba(232,244,248,0.52);
+  --glow:rgba(0,212,224,0.28);
+  --fh:'Bebas Neue',sans-serif;--fb:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:55px 55px;pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--c2);border-radius:4px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:rgba(6,13,26,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo-box{width:38px;height:38px;background:var(--c);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--fh);color:var(--bg);font-size:1rem;box-shadow:0 0 14px var(--glow)}
+.nav-brand{font-family:var(--fh);font-size:1.2rem;letter-spacing:3px;color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--c)}
+.cart-btn{position:relative;background:rgba(0,212,224,0.1);border:1px solid var(--border);color:var(--text);font-family:var(--fb);font-size:0.75rem;letter-spacing:1px;padding:9px 18px;border-radius:8px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px}
+.cart-btn:hover{border-color:var(--c);background:rgba(0,212,224,0.16)}
+.cart-count{background:var(--acc);color:#fff;font-size:0.6rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:absolute;top:-6px;right:-6px}
+
+/* HERO */
+#hero{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 5% 60px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.orb1{width:500px;height:500px;background:rgba(0,212,224,0.07);top:-80px;right:-80px;animation:pulse 8s ease-in-out infinite}
+.orb2{width:380px;height:380px;background:rgba(255,107,43,0.05);bottom:0;left:-60px;animation:pulse 11s ease-in-out infinite 3s}
+.hero-inner{position:relative;z-index:1;max-width:760px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,224,0.08);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:0.65rem;letter-spacing:2.5px;color:var(--c);text-transform:uppercase;margin-bottom:24px;animation:fadeUp .7s ease both}
+.bdot{width:6px;height:6px;background:var(--c);border-radius:50%;box-shadow:0 0 6px var(--c);animation:blink 2s infinite}
+.hero-title{font-family:var(--fh);font-size:clamp(3rem,7vw,5.5rem);line-height:.95;letter-spacing:2px;animation:fadeUp .7s ease .12s both}
+.hero-title span{color:var(--c)}
+.hero-title .ghost{-webkit-text-stroke:1px rgba(232,244,248,.28);color:transparent}
+.hero-desc{margin-top:20px;font-size:.95rem;color:var(--muted);line-height:1.7;animation:fadeUp .7s ease .24s both}
+.hero-ctas{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s ease .36s both}
+.btn-p{background:linear-gradient(135deg,var(--c),var(--c2));color:var(--bg);font-weight:700;font-size:.8rem;letter-spacing:2px;padding:13px 28px;border-radius:8px;text-decoration:none;text-transform:uppercase;transition:all .25s;box-shadow:0 4px 22px var(--glow)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--glow)}
+.btn-o{border:1px solid var(--border);color:var(--text);font-size:.8rem;letter-spacing:2px;padding:13px 28px;border-radius:8px;text-decoration:none;text-transform:uppercase;transition:all .25s;background:transparent}
+.btn-o:hover{border-color:var(--c);color:var(--c)}
+.hero-stats{margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s ease .48s both}
+.stat{border-left:2px solid var(--c);padding-left:14px}
+.stat-n{font-family:var(--fh);font-size:1.9rem;color:var(--c);letter-spacing:2px}
+.stat-l{font-size:.6rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:1px}
+
+/* TICKER */
+.ticker{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;overflow:hidden;position:relative;z-index:1}
+.t-track{display:inline-flex;gap:50px;animation:tick 20s linear infinite;white-space:nowrap}
+.t-item{font-family:var(--fh);font-size:.85rem;letter-spacing:3px;color:rgba(232,244,248,.18);display:flex;align-items:center;gap:12px}
+.t-item span{color:var(--c)}
+
+/* FILTER BAR */
+.filter-bar{position:relative;z-index:1;background:var(--bg2);border-bottom:1px solid var(--border);padding:20px 5%;display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center}
+.filter-label{font-size:.6rem;letter-spacing:3px;color:var(--c);text-transform:uppercase;margin-right:6px}
+.f-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--fb);font-size:.72rem;letter-spacing:1px;padding:8px 18px;border-radius:20px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.f-btn:hover,.f-btn.active{background:rgba(0,212,224,0.1);border-color:var(--c);color:var(--c)}
+
+/* SEARCH */
+.search-bar{position:relative;z-index:1;padding:24px 5% 0;display:flex;justify-content:center}
+.search-input{width:100%;max-width:500px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;color:var(--text);font-family:var(--fb);font-size:.88rem;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--c);box-shadow:0 0 0 3px rgba(0,212,224,.1)}
+.search-input::placeholder{color:var(--muted)}
+
+/* PRODUCTS */
+#produits{position:relative;z-index:1;padding:50px 5%}
+.sec-tag{font-size:.62rem;letter-spacing:4px;color:var(--c);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.sec-tag::before{content:'';width:28px;height:1px;background:var(--c)}
+.sec-title{font-family:var(--fh);font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:2px;margin-bottom:36px}
+.sec-title span{color:var(--c)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.prod-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .32s ease;position:relative;display:flex;flex-direction:column}
+.prod-card:hover{border-color:rgba(0,212,224,.38);transform:translateY(-5px);box-shadow:0 18px 46px rgba(0,0,0,.4),0 0 26px rgba(0,212,224,.1)}
+.prod-img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .4s}
+.prod-card:hover .prod-img{transform:scale(1.04)}
+.prod-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.prod-cat{font-size:.55rem;letter-spacing:2px;color:var(--c);text-transform:uppercase;margin-bottom:6px}
+.prod-name{font-family:var(--fh);font-size:1.15rem;letter-spacing:1.5px;margin-bottom:8px;line-height:1.2}
+.prod-type{font-size:.7rem;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.type-badge{background:rgba(0,212,224,.07);border:1px solid var(--border);border-radius:12px;padding:2px 9px;font-size:.55rem;letter-spacing:1px;color:var(--c);text-transform:uppercase}
+.prod-price{font-family:var(--fh);font-size:1.6rem;letter-spacing:2px;color:var(--text);margin-top:auto;margin-bottom:14px}
+.prod-price span{font-size:.75rem;color:var(--muted);font-family:var(--fb);font-weight:400;letter-spacing:1px}
+.prod-actions{display:flex;gap:10px}
+.btn-cart{flex:1;background:linear-gradient(135deg,var(--c),var(--c2));color:var(--bg);font-weight:700;font-size:.72rem;letter-spacing:1.5px;padding:10px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.btn-cart:hover{opacity:.88;transform:translateY(-1px)}
+.btn-wa{background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);color:#25d366;font-size:.72rem;letter-spacing:1px;padding:10px 14px;border-radius:7px;border:none;cursor:pointer;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.btn-wa:hover{background:rgba(37,211,102,.2);border-color:#25d366}
+.no-result{text-align:center;padding:60px;color:var(--muted);font-size:.9rem;width:100%;grid-column:1/-1}
+
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--bg2);border-left:1px solid var(--border);z-index:301;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{transform:translateX(0)}
+.cart-head{padding:24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.cart-head-title{font-family:var(--fh);font-size:1.4rem;letter-spacing:2px}
+.cart-close{background:transparent;border:1px solid var(--border);color:var(--muted);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem;transition:all .2s}
+.cart-close:hover{border-color:var(--c);color:var(--c)}
+.cart-items{flex:1;overflow-y:auto;padding:20px}
+.cart-empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.cart-empty-icon{font-size:3rem;margin-bottom:12px}
+.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.ci-img{width:64px;height:64px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.ci-info{flex:1}
+.ci-name{font-size:.8rem;font-weight:600;line-height:1.3;margin-bottom:4px}
+.ci-price{font-family:var(--fh);font-size:1rem;color:var(--c);letter-spacing:1px}
+.ci-qty{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qty-btn{background:rgba(0,212,224,.08);border:1px solid var(--border);color:var(--text);width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:.9rem;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.qty-btn:hover{border-color:var(--c);color:var(--c)}
+.qty-num{font-size:.85rem;font-weight:600;min-width:20px;text-align:center}
+.ci-del{background:transparent;border:none;color:rgba(255,100,100,.5);cursor:pointer;font-size:.85rem;padding:4px;transition:color .2s;margin-left:auto}
+.ci-del:hover{color:rgba(255,100,100,.9)}
+.cart-foot{padding:20px;border-top:1px solid var(--border)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.ct-label{font-size:.7rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.ct-val{font-family:var(--fh);font-size:1.5rem;letter-spacing:2px;color:var(--text)}
+.btn-order-wa{width:100%;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;font-family:var(--fb);font-weight:700;font-size:.85rem;letter-spacing:2px;padding:15px;border-radius:9px;cursor:pointer;text-transform:uppercase;transition:all .25s;box-shadow:0 4px 20px rgba(37,211,102,.25);display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-order-wa:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35)}
+.btn-clear-cart{width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--fb);font-size:.72rem;letter-spacing:1.5px;padding:10px;border-radius:8px;cursor:pointer;text-transform:uppercase;margin-top:10px;transition:all .2s}
+.btn-clear-cart:hover{border-color:rgba(255,100,100,.4);color:rgba(255,150,150,.8)}
+
+/* ABOUT */
+#apropos{position:relative;z-index:1;background:var(--bg2);padding:80px 5%}
+.about-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:46px}
+.about-card{text-align:center;padding:32px 18px;border-radius:14px;border:1px solid var(--border);background:var(--bg);transition:all .3s}
+.about-card:hover{border-color:rgba(0,212,224,.35);transform:translateY(-4px)}
+.about-icon{font-size:2.2rem;margin-bottom:14px}
+.about-t{font-family:var(--fh);font-size:1rem;letter-spacing:2px;color:var(--c);margin-bottom:8px}
+.about-d{font-size:.76rem;color:var(--muted);line-height:1.6}
+
+/* CONTACT */
+#contact{position:relative;z-index:1;padding:80px 5%}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:46px}
+.contact-big{background:linear-gradient(135deg,rgba(0,212,224,.08),rgba(0,212,224,.02));border:2px solid rgba(0,212,224,.25);border-radius:18px;padding:36px;text-align:center}
+.cb-label{font-size:.6rem;letter-spacing:3px;color:var(--c);text-transform:uppercase;margin-bottom:10px}
+.cb-num{font-family:var(--fh);font-size:2.2rem;letter-spacing:4px;color:var(--text);margin-bottom:18px}
+.cb-btns{display:flex;flex-direction:column;gap:12px}
+.btn-call{display:block;background:linear-gradient(135deg,var(--c),var(--c2));color:var(--bg);font-weight:700;font-size:.8rem;letter-spacing:2px;padding:13px;border-radius:8px;text-decoration:none;text-transform:uppercase;transition:all .25s;text-align:center}
+.btn-call:hover{transform:translateY(-1px)}
+.btn-wa2{display:block;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#25d366;font-weight:700;font-size:.8rem;letter-spacing:2px;padding:13px;border-radius:8px;text-decoration:none;text-transform:uppercase;transition:all .25s;text-align:center}
+.btn-wa2:hover{background:rgba(37,211,102,.2)}
+.contact-info-list{display:flex;flex-direction:column;gap:14px}
+.ci2{display:flex;align-items:flex-start;gap:14px;padding:18px;border:1px solid var(--border);border-radius:12px;background:var(--bg2);transition:all .3s}
+.ci2:hover{border-color:rgba(0,212,224,.3);transform:translateX(5px)}
+.ci2-icon{font-size:1.3rem;width:44px;height:44px;background:rgba(0,212,224,.07);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci2-label{font-size:.55rem;letter-spacing:2px;color:var(--c);text-transform:uppercase;margin-bottom:3px}
+.ci2-val{font-weight:600;font-size:.92rem}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--bg);border-top:1px solid var(--border);padding:48px 5% 24px}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.foot-logo{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.fl-box{width:38px;height:38px;background:var(--c);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--fh);color:var(--bg);font-size:1rem;box-shadow:0 0 14px var(--glow)}
+.fl-name{font-family:var(--fh);font-size:1.1rem;letter-spacing:3px}
+.foot-desc{font-size:.76rem;color:var(--muted);line-height:1.7;max-width:260px}
+.foot-col-t{font-size:.6rem;letter-spacing:3px;color:var(--c);text-transform:uppercase;margin-bottom:14px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.foot-links a{font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--text)}
+.foot-bottom{padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-copy{font-size:.7rem;color:var(--muted)}
+.socials{display:flex;gap:10px}
+.soc{width:34px;height:34px;border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.8rem;text-decoration:none;color:var(--muted);transition:all .2s}
+.soc:hover{border-color:var(--c);color:var(--c)}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--bg2);border:1px solid var(--c);color:var(--text);padding:12px 24px;border-radius:10px;font-size:.82rem;z-index:500;opacity:0;transition:all .3s;white-space:nowrap;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(24px);transition:all .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .about-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .hero-stats{gap:22px}
+  .about-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <div class="cart-head-title">ًں›’ MON PANIER</div>
+    <button class="cart-close" onclick="closeCart()">âœ•</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div class="cart-empty-icon">ًں›’</div><div>Votre panier est vide</div></div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total-row">
+      <div class="ct-label">Total</div>
+      <div class="ct-val" id="cartTotal">0 DA</div>
+    </div>
+    <button class="btn-order-wa" onclick="orderWhatsApp()">
+      <span>ًں“±</span> Commander via WhatsApp
+    </button>
+    <button class="btn-clear-cart" onclick="clearCart()">Vider le panier</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-box">TI</div>
+    <div>
+      <div class="nav-brand">TECHNO INFODZ</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#apropos">أ€ propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="cart-btn" onclick="toggleCart()">
+      ًں›’ Panier
+      <span class="cart-count" id="cartCount" style="display:none">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="bdot"></span>Lecteurs Code Barre آ· Imprimantes آ· POS â€” Algأ©rie ًں‡©ًں‡؟</div>
+    <h1 class="hero-title">
+      أ‰QUIPEZ<br><span>VOTRE CAISSE</span><br><span class="ghost">MAINTENANT.</span>
+    </h1>
+    <p class="hero-desc">Spأ©cialiste en matأ©riel POS et lecteurs codes-barres en Algأ©rie. Qualitأ© garantie, livraison rapide, SAV rأ©actif.</p>
+    <div class="hero-ctas">
+      <a href="#produits" class="btn-p">Voir les produits â†’</a>
+      <a href="https://wa.me/213666636473" target="_blank" class="btn-o">ًں“± WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Modأ¨les dispo</div></div>
+      <div class="stat"><div class="stat-n">500+</div><div class="stat-l">Clients</div></div>
+      <div class="stat"><div class="stat-n">24h</div><div class="stat-l">Livraison</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-track">
+    <div class="t-item"><span>âœ¦</span>SMART SP-X86</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-2210</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-8288</div>
+    <div class="t-item"><span>âœ¦</span>SMART SP-8608</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-2200</div>
+    <div class="t-item"><span>âœ¦</span>SMART RP-335A</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-666</div>
+    <div class="t-item"><span>âœ¦</span>SMART SP-9608H</div>
+    <div class="t-item"><span>âœ¦</span>SMART SP-X86</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-2210</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-8288</div>
+    <div class="t-item"><span>âœ¦</span>SMART SP-8608</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-2200</div>
+    <div class="t-item"><span>âœ¦</span>SMART RP-335A</div>
+    <div class="t-item"><span>âœ¦</span>HENEX HC-666</div>
+    <div class="t-item"><span>âœ¦</span>SMART SP-9608H</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar" style="position:relative;z-index:1;background:var(--bg);padding:30px 5% 0">
+  <input class="search-input" type="text" id="searchInput" placeholder="ًں”چ Rechercher un produit (ex: HENEX, SMART, sans fil...)" oninput="filterProducts()">
+</div>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <span class="filter-label">Filtrer :</span>
+  <button class="f-btn active" onclick="filterCat('tous',this)">Tous</button>
+  <button class="f-btn" onclick="filterCat('omnidirectionnel',this)">Omnidirectionnel</button>
+  <button class="f-btn" onclick="filterCat('filaire',this)">Filaire</button>
+  <button class="f-btn" onclick="filterCat('sans fil',this)">Sans fil</button>
+  <button class="f-btn" onclick="filterCat('imprimante',this)">Imprimantes</button>
+</div>
+
+<!-- PRODUCTS -->
+<section id="produits">
+  <div class="sec-tag">Catalogue</div>
+  <h2 class="sec-title">NOS <span>PRODUITS</span></h2>
+  <div class="grid" id="productGrid"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="apropos">
+  <div class="sec-tag">Pourquoi nous</div>
+  <h2 class="sec-title">LA <span>DIFFأ‰RENCE</span> TECHNO INFODZ</h2>
+  <div class="about-grid">
+    <div class="about-card reveal"><div class="about-icon">ًں›،ï¸ڈ</div><div class="about-t">QUALITأ‰ GARANTIE</div><div class="about-d">Produits testأ©s et certifiأ©s. Garantie constructeur sur chaque أ©quipement.</div></div>
+    <div class="about-card reveal"><div class="about-icon">âڑ،</div><div class="about-t">LIVRAISON 24H</div><div class="about-d">Livraison express sur Alger. Expأ©dition nationale en 48-72h.</div></div>
+    <div class="about-card reveal"><div class="about-icon">ًں”§</div><div class="about-t">SAV Rأ‰ACTIF</div><div class="about-d">Assistance technique par tأ©lأ©phone ou sur site. Rأ©ponse rapide.</div></div>
+    <div class="about-card reveal"><div class="about-icon">ًں’ژ</div><div class="about-t">PRIX COMPأ‰TITIFS</div><div class="about-d">Meilleurs prix du marchأ© algأ©rien. Tarifs prأ©fأ©rentiels en gros.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-tag">Contact</div>
+  <h2 class="sec-title">CONTACTEZ-<span>NOUS</span></h2>
+  <div class="contact-grid">
+    <div class="contact-big reveal">
+      <div class="cb-label">ًں“‍ Appelez ou أ©crivez-nous</div>
+      <div class="cb-num">0666 آ· 63 آ· 64 آ· 73</div>
+      <div class="cb-btns">
+        <a href="tel:0666636473" class="btn-call">ًں“‍ Appeler maintenant</a>
+        <a href="https://wa.me/213666636473" target="_blank" class="btn-wa2">ًں“± WhatsApp</a>
+      </div>
+    </div>
+    <div class="contact-info-list">
+      <div class="ci2 reveal"><div class="ci2-icon">ًں“‍</div><div><div class="ci2-label">Tأ©lأ©phone</div><div class="ci2-val">0666 63 64 73</div></div></div>
+      <div class="ci2 reveal"><div class="ci2-icon">ًں“چ</div><div><div class="ci2-label">Localisation</div><div class="ci2-val">Algأ©rie ًں‡©ًں‡؟ â€” Livraison nationale</div></div></div>
+      <div class="ci2 reveal"><div class="ci2-icon">âڈ°</div><div><div class="ci2-label">Horaires</div><div class="ci2-val">8h00 â€“ 20h00 آ· 7j/7</div></div></div>
+      <div class="ci2 reveal"><div class="ci2-icon">ًںڑڑ</div><div><div class="ci2-label">Livraison</div><div class="ci2-val">24h Alger آ· 48-72h nationale</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <div class="foot-logo"><div class="fl-box">TI</div><div><div class="fl-name">TECHNO INFODZ</div></div></div>
+      <div class="foot-desc">Spأ©cialiste en matأ©riel POS et lecteurs codes-barres en Algأ©rie. Votre partenaire technologique de confiance.</div>
+    </div>
+    <div>
+      <div class="foot-col-t">Produits</div>
+      <ul class="foot-links">
+        <li><a href="#produits">Lecteurs omnidirectionnels</a></li>
+        <li><a href="#produits">Lecteurs filaires</a></li>
+        <li><a href="#produits">Lecteurs sans fil</a></li>
+        <li><a href="#produits">Imprimantes ticket</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-t">Contact</div>
+      <ul class="foot-links">
+        <li><a href="tel:0666636473">ًں“‍ 0666 63 64 73</a></li>
+        <li><a href="https://wa.me/213666636473">ًں“± WhatsApp</a></li>
+        <li><a href="#contact">Nous trouver</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-copy">آ© 2025 Techno Infodz آ· Technology Information Systems آ· Algأ©rie ًں‡©ًں‡؟</div>
+    <div class="socials">
+      <a href="#" class="soc">f</a>
+      <a href="https://wa.me/213666636473" class="soc">wa</a>
+      <a href="#" class="soc">ig</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== PRODUCTS DATA =====
+const PRODUCTS = [
+  // OMNIDIRECTIONNEL
+  {id:1,  name:"SMART SP_X86",     cat:"omnidirectionnel", type:"Omnidirectionnel", prix:16500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur omnidirectionnel haute vitesse, idأ©al pour caisse supermarchأ©."},
+  {id:2,  name:"HENEX HC_2210",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:14500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner omnidirectionnel 2D/QR Code, connexion USB."},
+  {id:3,  name:"SMART SP_8608",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:15500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur omnidirectionnel rotule 360آ°, lecture rapide."},
+  {id:4,  name:"HENEX HC_2200",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:14000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur omnidirectionnel compact, USB, 1D et 2D."},
+  {id:5,  name:"HENEX HC_8288",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:14000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner omnidirectionnel bureau, lecture automatique."},
+  {id:6,  name:"HENEX HC_666",     cat:"omnidirectionnel", type:"Omnidirectionnel", prix:13000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur omnidirectionnel design compact orange, QR Code."},
+  {id:7,  name:"HENEX HC_6052",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:13500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner bureau omnidirectionnel, lecture 1D/2D."},
+  {id:8,  name:"SMART SP_8602",    cat:"omnidirectionnel", type:"Omnidirectionnel", prix:14500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur omnidirectionnel globe, haute prأ©cision."},
+  {id:9,  name:"SMART SP_9608H",   cat:"omnidirectionnel", type:"Omnidirectionnel", prix:19900, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner omnidirectionnel premium, lecture ultra-rapide."},
+  // FILAIRE
+  {id:10, name:"SMART Filaire SP_2066",  cat:"filaire", type:"Filaire", prix:null, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur filaire avec socle, USB, idأ©al pour commerce."},
+  {id:11, name:"SMART Filaire SP_6221",  cat:"filaire", type:"Filaire", prix:7000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur filaire avec base, lecture 1D, USB."},
+  {id:12, name:"SMART Filaire SP_1500U", cat:"filaire", type:"Filaire", prix:7500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner filaire compact, plug & play USB."},
+  {id:13, name:"HENEX Filaire HC_3206",  cat:"filaire", type:"Filaire", prix:7000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur filaire sur socle, lecture codes 1D."},
+  // SANS FIL
+  {id:14, name:"HENEX Sans Fil HC_3208R", cat:"sans fil", type:"Sans Fil Bluetooth", prix:11500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur sans fil Bluetooth, portأ©e 10m, avec base."},
+  {id:15, name:"HENEX Sans Fil HC_5208R", cat:"sans fil", type:"Sans Fil Bluetooth", prix:12000, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner sans fil Bluetooth avancأ©, rechargeable."},
+  {id:16, name:"HENEX Sans Fil HC_5208SR",cat:"sans fil", type:"Sans Fil Bluetooth", prix:13500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Lecteur sans fil SR haute performance, 2D/QR."},
+  {id:17, name:"HENEX Sans Fil HC_3206",  cat:"sans fil", type:"Sans Fil Bluetooth", prix:10500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Scanner sans fil souple, col de cygne flexible."},
+  // IMPRIMANTES
+  {id:18, name:"SMART Imprimante RP_335A",cat:"imprimante", type:"Imprimante Ticket", prix:14500, img:"https://i.imgur.com/9QBRvNk.png", desc:"Imprimante thermique tickets de caisse, 80mm, USB/LAN/Bluetooth, coupe automatique."},
+];
+
+let cart = [];
+let activeFilter = 'tous';
+
+// ===== RENDER PRODUCTS =====
+function renderProducts(list){
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  if(!list.length){
+    grid.innerHTML = '<div class="no-result">Aucun produit trouvأ© ًں”چ</div>';
+    return;
+  }
+  list.forEach((p,i)=>{
+    const prixText = p.prix ? p.prix.toLocaleString('fr-DZ') + ' <span>DA</span>' : 'Appelez pour prix';
+    const card = document.createElement('div');
+    card.className = 'prod-card reveal';
+    card.style.animationDelay = (i*0.04)+'s';
+    card.innerHTML = `
+      <div style="background:var(--bg3);height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;overflow:hidden">
+        ${p.cat==='imprimante'?'ًں–¨ï¸ڈ':p.cat==='filaire'?'ًں“،':p.cat==='sans fil'?'ًں“¶':'ًں”چ'}
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-type"><span class="type-badge">${p.type}</span></div>
+        <div style="font-size:.75rem;color:var(--muted);line-height:1.55;margin-bottom:14px">${p.desc}</div>
+        <div class="prod-price">${prixText}</div>
+        <div class="prod-actions">
+          ${p.prix ? `<button class="btn-cart" onclick="addToCart(${p.id})">+ Panier</button>` : ''}
+          <button class="btn-wa" onclick="orderOneWA(${p.id})" style="${!p.prix?'flex:1':''}">${p.prix?'ًں“± WA':'ًں“± Demander prix'}</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+  // trigger reveal
+  setTimeout(()=>{
+    document.querySelectorAll('.reveal').forEach(el=>{
+      const obs = new IntersectionObserver(e=>{
+        e.forEach(x=>{ if(x.isIntersecting) x.target.classList.add('visible'); });
+      },{threshold:.08});
+      obs.observe(el);
+    });
+  },50);
+}
+
+function filterCat(cat, btn){
+  activeFilter = cat;
+  document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterProducts(){ applyFilters(); }
+
+function applyFilters(){
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  let list = PRODUCTS;
+  if(activeFilter !== 'tous') list = list.filter(p=>p.cat===activeFilter);
+  if(q) list = list.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.type.toLowerCase().includes(q));
+  renderProducts(list);
+}
+
+// ===== CART =====
+function addToCart(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p || !p.prix) return;
+  const ex = cart.find(x=>x.id===id);
+  if(ex) ex.qty++;
+  else cart.push({...p, qty:1});
+  updateCartUI();
+  showToast('âœ… ' + p.name + ' ajoutأ© au panier');
+}
+
+function removeFromCart(id){
+  cart = cart.filter(x=>x.id!==id);
+  updateCartUI();
+}
+
+function changeQty(id, delta){
+  const item = cart.find(x=>x.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) removeFromCart(id);
+  else updateCartUI();
+}
+
+function clearCart(){
+  cart = [];
+  updateCartUI();
+}
+
+function updateCartUI(){
+  const total = cart.reduce((s,x)=>s+x.prix*x.qty, 0);
+  const count = cart.reduce((s,x)=>s+x.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = count;
+  countEl.style.display = count ? 'flex' : 'none';
+  document.getElementById('cartTotal').textContent = total.toLocaleString('fr-DZ') + ' DA';
+  const itemsEl = document.getElementById('cartItems');
+  const footEl = document.getElementById('cartFoot');
+  if(!cart.length){
+    itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">ًں›’</div><div>Votre panier est vide</div></div>';
+    footEl.style.display = 'none';
+    return;
+  }
+  footEl.style.display = 'block';
+  itemsEl.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <div style="width:64px;height:64px;background:var(--bg3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0">
+        ${item.cat==='imprimante'?'ًں–¨ï¸ڈ':item.cat==='filaire'?'ًں“،':item.cat==='sans fil'?'ًں“¶':'ًں”چ'}
+      </div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-price">${(item.prix*item.qty).toLocaleString('fr-DZ')} DA</div>
+        <div class="ci-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">âˆ’</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          <button class="ci-del" onclick="removeFromCart(${item.id})">ًں—‘ï¸ڈ</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleCart(){
+  const d = document.getElementById('cartDrawer');
+  const o = document.getElementById('cartOverlay');
+  d.classList.toggle('open');
+  o.classList.toggle('open');
+}
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+}
+
+function orderWhatsApp(){
+  if(!cart.length) return;
+  const total = cart.reduce((s,x)=>s+x.prix*x.qty,0);
+  let msg = 'ًں›’ *Nouvelle commande â€“ Techno Infodz*\n\n';
+  cart.forEach(item=>{
+    msg += `â€¢ ${item.name} أ— ${item.qty} = ${(item.prix*item.qty).toLocaleString('fr-DZ')} DA\n`;
+  });
+  msg += `\nًں’° *Total : ${total.toLocaleString('fr-DZ')} DA*\n\nMerci de confirmer ma commande ًں™ڈ`;
+  window.open('https://wa.me/213666636473?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function orderOneWA(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const msg = p.prix
+    ? `ًں›’ Bonjour, je veux commander :\n\nâ€¢ ${p.name}\nPrix : ${p.prix.toLocaleString('fr-DZ')} DA\n\nMerci de confirmer ًں™ڈ`
+    : `ًں‘‹ Bonjour, je voudrais connaأ®tre le prix de :\n\nâ€¢ ${p.name}\n\nMerci !`;
+  window.open('https://wa.me/213666636473?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// ===== TOAST =====
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// NAV scroll
+window.addEventListener('scroll',()=>{
+  const nav = document.querySelector('nav');
+  nav.style.background = window.scrollY>50 ? 'rgba(6,13,26,0.98)' : 'rgba(6,13,26,0.92)';
+});
+
+// INIT
+renderProducts(PRODUCTS);
+</script>
+</body>
+</html>
