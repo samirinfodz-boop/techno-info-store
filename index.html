@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techno Infodz Store | متجر تكنو إنفو دي زاد</title>
+    <title>Techno Infodz Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
         body { font-family: 'Cairo', sans-serif; background-color: #f3f4f6; }
         #admin-panel { display: none; position: fixed; top: 0; right: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; color: white; padding: 20px; overflow-y: auto; }
-        .product-card:hover { transform: translateY(-5px); transition: 0.3s; }
     </style>
 </head>
 <body>
@@ -18,47 +16,31 @@
     <header class="bg-blue-800 text-white p-6 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-bold cursor-pointer select-none" onclick="triggerAdmin()">TECHNO INFODZ</h1>
-            <nav>
-                <a href="tel:0666636473" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg font-bold">
-                    <i class="fas fa-phone"></i> 0666636473
-                </a>
-            </nav>
+            <a href="tel:0666636473" class="bg-green-500 px-4 py-2 rounded-lg font-bold">0666636473</a>
         </div>
     </header>
 
     <main class="container mx-auto p-8">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-gray-800">أجهزة الباركود وحلول البرمجيات</h2>
-            <p class="text-gray-600 mt-2">الموزع الرائد لعلامات HENEX و SMART في الجزائر</p>
-        </div>
         <div id="products-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
     </main>
 
     <div id="admin-panel">
         <div class="container mx-auto">
-            <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-6">
-                <h2 class="text-2xl font-bold text-yellow-500">لوحة التحكم</h2>
-                <button onclick="closeAdmin()" class="text-red-500 text-3xl">&times;</button>
-            </div>
+            <button onclick="closeAdmin()" class="text-red-500 text-3xl mb-4">&times; إغلاق</button>
             <div class="bg-gray-800 p-6 rounded-xl mb-8">
-                <h3 class="text-xl mb-4 text-blue-400">إضافة منتج جديد</h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <input type="text" id="p-name" placeholder="اسم المنتج" class="p-2 rounded bg-gray-700 text-white border-none">
-                    <input type="text" id="p-price" placeholder="السعر" class="p-2 rounded bg-gray-700 text-white border-none">
-                    <input type="text" id="p-img" placeholder="رابط الصورة" class="p-2 rounded bg-gray-700 text-white border-none">
-                    <button onclick="saveNewProduct()" class="bg-yellow-600 p-2 rounded font-bold">حفظ ونشر</button>
-                </div>
+                <input type="text" id="p-name" placeholder="اسم المنتج" class="p-2 mb-2 w-full rounded bg-gray-700 text-white">
+                <input type="text" id="p-price" placeholder="السعر" class="p-2 mb-2 w-full rounded bg-gray-700 text-white">
+                <button onclick="saveNewProduct()" class="bg-yellow-600 w-full p-2 rounded font-bold">حفظ ونشر</button>
             </div>
-            <div id="admin-products-list" class="space-y-4"></div>
+            <div id="admin-products-list"></div>
         </div>
     </div>
 
     <script>
-        // الإعدادات ثابتة
+        // --- الإعدادات ---
         const REPO_OWNER = 'samirinfodz-boop';
         const REPO_NAME = 'techno-info-store';
         
-        // هذه القائمة ستتحدث تلقائياً عند الإضافة من لوحة التحكم
         let products = [
             { id: 1, name: "HENEX HC-3208", price: "14500", img: "https://i.imgur.com/9QBRvNk.png" },
             { id: 2, name: "SMART SP-X86", price: "16500", img: "https://i.imgur.com/9QBRvNk.png" }
@@ -68,11 +50,11 @@
             const grid = document.getElementById('products-grid');
             if(!grid) return;
             grid.innerHTML = products.map(p => `
-                <div class="bg-white p-6 rounded-2xl shadow-md product-card text-center border">
-                    <img src="${p.img}" class="w-48 h-48 mx-auto object-contain mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">${p.name}</h3>
-                    <p class="text-blue-600 font-bold text-lg my-2">${p.price} DA</p>
-                    <a href="https://wa.me/213666636473?text=طلب: ${p.name}" class="bg-green-500 text-white px-6 py-2 rounded-full inline-block font-bold">اطلب الآن</a>
+                <div class="bg-white p-6 rounded-xl shadow text-center border">
+                    <img src="${p.img}" class="w-32 h-32 mx-auto mb-4">
+                    <h3 class="font-bold">${p.name}</h3>
+                    <p class="text-blue-600">${p.price} DA</p>
+                    <button class="bg-green-500 text-white px-4 py-1 mt-2 rounded">اطلب الآن</button>
                 </div>
             `).join('');
         }
@@ -81,29 +63,24 @@
         function triggerAdmin() {
             clicks++;
             if (clicks >= 5) {
-                const token = prompt("🔒 أدخل الـ Token الجديد (Classic) للتحكم:");
-                if (token && token.startsWith('ghp_')) {
-                    sessionStorage.setItem('adminToken', token);
+                const token = prompt("أدخل GitHub Token الجديد:");
+                if (token) {
+                    sessionStorage.setItem('token', token);
                     document.getElementById('admin-panel').style.display = 'block';
                     renderAdminList();
-                } else {
-                    alert("الـ Token غير صحيح!");
                 }
                 clicks = 0;
             }
         }
 
-        function closeAdmin() { 
-            document.getElementById('admin-panel').style.display = 'none'; 
-            sessionStorage.removeItem('adminToken');
-        }
+        function closeAdmin() { document.getElementById('admin-panel').style.display = 'none'; }
 
         function renderAdminList() {
             const list = document.getElementById('admin-products-list');
             list.innerHTML = products.map((p, index) => `
-                <div class="flex justify-between bg-gray-700 p-4 rounded items-center">
-                    <span>${p.name} - ${p.price} DA</span>
-                    <button onclick="deleteProduct(${index})" class="bg-red-600 px-3 py-1 rounded">حذف</button>
+                <div class="flex justify-between p-2 border-b border-gray-600">
+                    <span>${p.name}</span>
+                    <button onclick="deleteProduct(${index})" class="text-red-400">حذف</button>
                 </div>
             `).join('');
         }
@@ -111,39 +88,33 @@
         async function saveNewProduct() {
             const name = document.getElementById('p-name').value;
             const price = document.getElementById('p-price').value;
-            const img = document.getElementById('p-img').value;
-            if(!name || !price) return alert("يرجى ملء البيانات");
-            products.push({ id: Date.now(), name, price, img: img || 'https://via.placeholder.com/150' });
+            if(!name || !price) return alert("أكمل البيانات");
+            products.push({ id: Date.now(), name, price, img: 'https://via.placeholder.com/150' });
             await syncToGitHub();
         }
 
-        async function deleteProduct(index) {
-            if(confirm("حذف المنتج؟")) { products.splice(index, 1); await syncToGitHub(); }
-        }
-
         async function syncToGitHub() {
-            const token = sessionStorage.getItem('adminToken');
+            const token = sessionStorage.getItem('token');
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/index.html`;
             try {
-                const getFile = await fetch(url, { headers: { 'Authorization': `token ${token}` } });
-                const fileData = await getFile.json();
-                const sha = fileData.sha;
-                let currentContent = decodeURIComponent(escape(atob(fileData.content)));
+                const res = await fetch(url, { headers: { 'Authorization': `token ${token}` } });
+                const data = await res.json();
+                const sha = data.sha;
+                let content = decodeURIComponent(escape(atob(data.content)));
                 const regex = /let products = \[[\s\S]*?\];/;
-                const newContent = currentContent.replace(regex, `let products = ${JSON.stringify(products, null, 4)};`);
+                const newContent = content.replace(regex, `let products = ${JSON.stringify(products, null, 4)};`);
                 
-                const response = await fetch(url, {
+                await fetch(url, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        message: "Update products",
+                        message: "Update",
                         content: btoa(unescape(encodeURIComponent(newContent))),
                         sha: sha
                     })
                 });
-                if(response.ok) { alert("تم الحفظ بنجاح!"); location.reload(); }
-                else { alert("فشل الحفظ، تأكد من الـ Token."); }
-            } catch (e) { alert("خطأ في الاتصال."); }
+                alert("تم التحديث!"); location.reload();
+            } catch (e) { alert("خطأ في الاتصال"); }
         }
         renderProducts();
     </script>
