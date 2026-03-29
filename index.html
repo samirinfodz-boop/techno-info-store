@@ -37,7 +37,7 @@
     <div id="admin-panel">
         <div class="container mx-auto">
             <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-6">
-                <h2 class="text-2xl font-bold text-yellow-500">لوحة التحكم الأمنة</h2>
+                <h2 class="text-2xl font-bold text-yellow-500">لوحة التحكم</h2>
                 <button onclick="closeAdmin()" class="text-red-500 text-3xl">&times;</button>
             </div>
             <div class="bg-gray-800 p-6 rounded-xl mb-8">
@@ -54,9 +54,11 @@
     </div>
 
     <script>
+        // الإعدادات ثابتة
         const REPO_OWNER = 'samirinfodz-boop';
         const REPO_NAME = 'techno-info-store';
         
+        // هذه القائمة ستتحدث تلقائياً عند الإضافة من لوحة التحكم
         let products = [
             { id: 1, name: "HENEX HC-3208", price: "14500", img: "https://i.imgur.com/9QBRvNk.png" },
             { id: 2, name: "SMART SP-X86", price: "16500", img: "https://i.imgur.com/9QBRvNk.png" }
@@ -79,13 +81,13 @@
         function triggerAdmin() {
             clicks++;
             if (clicks >= 5) {
-                const token = prompt("🔒 يرجى إدخال GitHub Token الخاص بك للتعديل:");
+                const token = prompt("🔒 أدخل الـ Token الجديد (Classic) للتحكم:");
                 if (token && token.startsWith('ghp_')) {
                     sessionStorage.setItem('adminToken', token);
                     document.getElementById('admin-panel').style.display = 'block';
                     renderAdminList();
                 } else {
-                    alert("Token غير صالح أو تم إلغاؤه!");
+                    alert("الـ Token غير صحيح!");
                 }
                 clicks = 0;
             }
@@ -110,16 +112,13 @@
             const name = document.getElementById('p-name').value;
             const price = document.getElementById('p-price').value;
             const img = document.getElementById('p-img').value;
-            if(!name || !price) return alert("يرجى إكمال البيانات");
+            if(!name || !price) return alert("يرجى ملء البيانات");
             products.push({ id: Date.now(), name, price, img: img || 'https://via.placeholder.com/150' });
             await syncToGitHub();
         }
 
         async function deleteProduct(index) {
-            if(confirm("هل تريد الحذف نهائياً؟")) {
-                products.splice(index, 1);
-                await syncToGitHub();
-            }
+            if(confirm("حذف المنتج؟")) { products.splice(index, 1); await syncToGitHub(); }
         }
 
         async function syncToGitHub() {
@@ -137,14 +136,14 @@
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        message: "Update products via Secure Admin",
+                        message: "Update products",
                         content: btoa(unescape(encodeURIComponent(newContent))),
                         sha: sha
                     })
                 });
-                if(response.ok) { alert("✅ تم الحفظ بنجاح!"); location.reload(); }
-                else { alert("❌ فشل الحفظ. تأكد من صلاحيات الـ Token."); }
-            } catch (e) { alert("حدث خطأ في الاتصال."); }
+                if(response.ok) { alert("تم الحفظ بنجاح!"); location.reload(); }
+                else { alert("فشل الحفظ، تأكد من الـ Token."); }
+            } catch (e) { alert("خطأ في الاتصال."); }
         }
         renderProducts();
     </script>
